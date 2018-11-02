@@ -61,4 +61,14 @@ export class ApiHitService {
     return this.http.get(api, this.setHeaders());
   }
 
+  getReviews(data){
+    let api = this.apiUrl + '/reviews?res_id=' + data;
+    return this.http.get(api, this.setHeaders());
+  }
+
+  getMenu(data){
+    let api = this.apiUrl + '/dailymenu?res_id=' + data;
+    return this.http.get(api, this.setHeaders());
+  }
+
 }

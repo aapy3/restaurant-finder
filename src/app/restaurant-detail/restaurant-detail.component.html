@@ -14,7 +14,36 @@
         <span>Address</span>
         <br>
         <span>{{placeDetails.location.address}}</span>
+        <!-- <hr>
+        <div class="row" *ngIf="">
+          <span class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">Menu</span>
+          <div class="offset-xl-2 offset-lg-2 offset-md-2 col-xl-8 col-lg-8 col-md-8 col-sm-11 col-xs-11">
+
+          </div>
+
+        </div> -->
         <hr>
+        <span>Ratings</span>
+        <br>
+        <div *ngIf="reviews">
+          <div class="row header_margin" *ngFor="let data of reviews.user_reviews">
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+              <img class="rounded-circle" mat-card-sm-image [(src)]="data.review.user.profile_image" alt="Photo of a Customer">
+            </div>
+            <div class="offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10">
+              <span>{{data.review.user.name}}</span>
+              <br>
+              <!-- <span>{{data.review.rating}} <i class="fa fa-star" style="color:gold" aria-hidden="true"></i></span> -->
+              <ngb-rating [(rate)]="data.review.rating" max="5" class="designStars"></ngb-rating>
+              <br>
+              <p>{{data.review.review_text}}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!reviews">
+          No Reviews Available
+        </div>
+       
       </mat-card-content>
     </mat-card>
   </div>

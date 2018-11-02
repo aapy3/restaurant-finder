@@ -34,7 +34,7 @@ export class RestaurantListComponent implements OnInit {
       if(result.status == 200){
         console.log(result)
         this.router.navigate(['/restaurant-details']);
-        this.hit.restaurantDetails(JSON.parse(result._body));
+        this.hit.restaurantDetails(JSON.parse(result['_body']));
       }
     })
   }

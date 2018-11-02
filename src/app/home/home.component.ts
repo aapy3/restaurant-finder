@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
       this.hit.getRestaurants(data).subscribe((result) => {
         if(result.status == 200){
           this.router.navigate(['/restaurants']);
-          this.hit.sendRestaurants(JSON.parse(result._body));
+          this.hit.sendRestaurants(JSON.parse(result['_body']));
         }
       })
     }
@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit {
             }
             this.hit.getCities(data).subscribe((result) => {
               console.log(result)
-              let data = JSON.parse(result._body).location_suggestions[0];
+              let data = JSON.parse(result['_body']).location_suggestions[0];
               this.searchRestaurants(data);
             })
           }

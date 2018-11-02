@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgbModalModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyOwnCustomMaterialModule } from './angularMaterial.module';
@@ -23,7 +23,9 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
     routing,
     MyOwnCustomMaterialModule,
     NgbModule,
-    HttpModule
+    HttpModule,
+    NgbModalModule,
+    NgbRatingModule
   ],
   providers: [
     ApiHitService
