@@ -4,8 +4,8 @@
     <div class="row" style="margin-bottom:5%;">
       <span class="col-xl-5 col-lg-5 col-md-5 col-xs-5">Select City</span>
       <span class="col-xl-5 col-lg-5 col-md-5 col-xs-5">OR</span>
-      <a  (click)="getLocation()" style="cursor:pointer">
-          <i class="fa fa-compass" aria-hidden="true"></i>
+      <a title="Current Location" (click)="getLocation()" style="cursor:pointer;margin-left: 10%;">
+          <i class="fa fa-map-marker" style="font-size:20px;" aria-hidden="true"></i>
       </a>
     </div>
   <mat-card (click)="searchRestaurants(data)" class="city_name" *ngFor="let data of cityArray">
