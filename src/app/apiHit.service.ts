@@ -62,8 +62,8 @@ export class ApiHitService {
     return this.http.get(api, this.setHeaders());
   }
 
-  getReviews(data){
-    let api = this.apiUrl + '/reviews?res_id=' + data;
+  getReviews(data,limit,skip){
+    let api = this.apiUrl + '/reviews?res_id=' + data + '&start='+ skip + '&count='+limit;
     return this.http.get(api, this.setHeaders());
   }
 

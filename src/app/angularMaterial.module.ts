@@ -17,7 +17,8 @@ import { MatCheckboxModule,
          MatExpansionModule,
          MatSidenavModule,
         MatMenuModule,
-        MatAutocompleteModule } from '@angular/material';
+        MatAutocompleteModule,
+        MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   imports: [ MatCheckboxModule,
@@ -38,7 +39,8 @@ import { MatCheckboxModule,
              MatExpansionModule,
              MatSidenavModule,
              MatMenuModule,
-            MatAutocompleteModule 
+            MatAutocompleteModule,
+            MatPaginatorModule
         ],
   exports: [ MatCheckboxModule,
              MatFormFieldModule,
@@ -58,7 +60,8 @@ import { MatCheckboxModule,
              MatExpansionModule,
              MatSidenavModule,
              MatMenuModule,
-             MatAutocompleteModule
+             MatAutocompleteModule,
+             MatPaginatorModule
             ],
 })
 export class MyOwnCustomMaterialModule { }

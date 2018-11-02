@@ -5,7 +5,8 @@
       <mat-card-content>
         <span><b>{{placeDetails.name}}</b></span>
         <br><br>
-        <i class="fa fa-star" style="color:gold" aria-hidden="true"></i> {{placeDetails.user_rating.aggregate_rating}} ({{placeDetails.user_rating.votes}}) | 
+        <i class="fa fa-star" style="color:gold" aria-hidden="true"></i> {{placeDetails.user_rating.aggregate_rating}}
+        ({{placeDetails.user_rating.votes}}) |
         <hr>
         <span>Cost for 2</span>
         <br>
@@ -39,11 +40,13 @@
               <p>{{data.review.review_text}}</p>
             </div>
           </div>
+          <mat-paginator (page)="changePage($event)" [length]="reviews.reviews_count" [pageSize]="5">
+          </mat-paginator>
         </div>
         <div *ngIf="!reviews">
           No Reviews Available
         </div>
-       
+
       </mat-card-content>
     </mat-card>
   </div>

@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
     NgbModule,
     HttpModule,
     NgbModalModule,
-    NgbRatingModule
+    NgbRatingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ApiHitService
