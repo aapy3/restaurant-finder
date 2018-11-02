@@ -102,7 +102,6 @@ export class HomeComponent implements OnInit {
     getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( position => {
-          console.log(position.coords.latitude,position.coords.longitude);
           let lat = position.coords.latitude;
           let lng = position.coords.longitude;
           if(lat && lng){

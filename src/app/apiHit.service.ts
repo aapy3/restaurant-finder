@@ -54,10 +54,11 @@ export class ApiHitService {
 
   getCities(data){
     let queryData;
+    let api;
     if(data.lat && data.lng){
       queryData = 'lat=' + data.lat + '&lon=' + data.lng
+      api = this.apiUrl + '/cities?' + queryData
     }
-    let api = this.apiUrl + '/cities?' + queryData
     return this.http.get(api, this.setHeaders());
   }
 
