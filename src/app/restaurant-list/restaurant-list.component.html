@@ -1,5 +1,5 @@
 <div class="row" *ngIf="restaurantsArray">
-  <div class="offset-xl-1 offset-lg-1 offset-md-1 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+  <div class="offset-xl-2 offset-lg-2 offset-md-2 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
       Showing Results
     <mat-card class="row card_margin" *ngFor="let data of restaurantsArray" style="cursor:pointer" (click)="getRestaurantDetails(data)">
       <img class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb != '' " mat-card-md-image [(src)]="data.restaurant.thumb" alt="Restaurant photo">
