@@ -3,7 +3,10 @@
     <mat-card class="">
       <img mat-card-image [(src)]="placeDetails.featured_image" alt="Photo of a Restaurant">
       <mat-card-content>
-        <span><b>{{placeDetails.name}}</b></span>
+        <span>
+          <b>{{placeDetails.name}}</b>
+          <i style="margin-left:5%;" [ngClass]="{'like': placeDetails.isLike, 'unlike': !placeDetails.isLike}" class="fa fa-thumbs-up" aria-hidden="true"></i>
+        </span>
         <br><br>
         <i class="fa fa-star" style="color:gold" aria-hidden="true"></i> {{placeDetails.user_rating.aggregate_rating}}
         ({{placeDetails.user_rating.votes}}) |

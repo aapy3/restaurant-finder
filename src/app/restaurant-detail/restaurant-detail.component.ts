@@ -49,7 +49,6 @@ export class RestaurantDetailComponent implements OnInit {
     this.hit.getReviews(this.placeDetails.id,this.limit,this.skip).subscribe((result) => {
       if(result.status == 200){
         this.reviews = JSON.parse(result['_body']);
-        console.log(this.reviews)
       }
       else{
         this.reviews = undefined;
