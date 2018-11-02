@@ -25,7 +25,13 @@ export class ApiHitService {
   }
 
   getRestaurants(data){
-    let api = this.apiUrl + '/search?&lat='+data.latitude+'&lon='+data.longitude;
+    let api;
+    if(data.latitude){
+      api = this.apiUrl + '/search?lat='+data.latitude+'&lon='+data.longitude;
+    }
+    // else if(data.name){
+    //   api = this.apiUrl + '/search?q='+data.name;
+    // }
     return this.http.get(api, this.setHeaders());
   }
 
@@ -57,8 +63,11 @@ export class ApiHitService {
     let api;
     if(data.lat && data.lng){
       queryData = 'lat=' + data.lat + '&lon=' + data.lng
-      api = this.apiUrl + '/cities?' + queryData
     }
+    else if(data.cityName){
+      queryData = 'query=' + data.cityName;
+    }
+    api = this.apiUrl + '/locations?' + queryData
     return this.http.get(api, this.setHeaders());
   }
 

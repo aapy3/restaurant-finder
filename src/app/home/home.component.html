@@ -1,7 +1,11 @@
 <div class="offset-xl-3 offset-lg-3 offset-md-3 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 header_margin">
-
-    <!-- <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search"/> -->
-    <div class="row" style="margin-bottom:5%;">
+ 
+  <ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.city_name" [term]="t"></ngb-highlight>
+  </ng-template>
+  <input placeholder="Search City" id="typeahead-template" type="text" class="form-control" (selectItem)="onSelectTypeahead($event.item)" (keypress)="searchCity()" [ngbTypeahead]="search" [resultTemplate]="rt"
+  [inputFormatter]="formatter" />
+    <div class="row" style="margin-bottom:5%;margin-top:5%">
       <span class="col-xl-5 col-lg-5 col-md-5 col-xs-5">Select City</span>
       <span class="col-xl-5 col-lg-5 col-md-5 col-xs-5">OR</span>
       <a title="Current Location" (click)="getLocation()" style="cursor:pointer;margin-left: 10%;">

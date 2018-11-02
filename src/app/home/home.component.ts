@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   public cityArray = [];
   public cityName;
+  searchCityArray: any = [];
   constructor(private hit : ApiHitService,private router: Router,) { 
   }
 
@@ -79,16 +80,30 @@ export class HomeComponent implements OnInit {
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 1 ? []
-        : this.cityArray.filter(v =>{
-          console.log(v)
-          return v.city_name.toLowerCase().indexOf(term.toLowerCase()) > -1}).slice(0, 10)))
+      map(term => this.searchCityArray.length == 0 ? []
+        : this.searchCityArray.filter(v => v.city_name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+
+  formatter = (x: {city_name: string}) => x.city_name;
         
 
-    // searchCity(){
-    //   console.log(this.cityName);
-    // }
+    searchCity(){
+      this.cityName = document.getElementById('typeahead-template')['value'];
+      let data = {
+        'cityName': this.cityName
+      }
+      if(this.cityName.length > 1){
+        this.hit.getCities(data).subscribe((result) => {
+          let data = JSON.parse(result['_body']).location_suggestions;
+          this.searchCityArray = data;
+        })
+      }
+      
+    }
+
+    onSelectTypeahead(data){
+      this.searchRestaurants(data);
+    }
 
     searchRestaurants(data){
       this.hit.getRestaurants(data).subscribe((result) => {
@@ -110,7 +125,6 @@ export class HomeComponent implements OnInit {
               lng: lng
             }
             this.hit.getCities(data).subscribe((result) => {
-              console.log(result)
               let data = JSON.parse(result['_body']).location_suggestions[0];
               this.searchRestaurants(data);
             })

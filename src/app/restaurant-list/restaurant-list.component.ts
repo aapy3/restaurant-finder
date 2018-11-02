@@ -21,7 +21,6 @@ export class RestaurantListComponent implements OnInit {
       this.restaurantsArray = this.hit.listRestaurants().restaurants;
       this.restaurantsCount = this.hit.listRestaurants().results_shown;
       this.restaurantsTotalCount = this.hit.listRestaurants().results_found;
-      console.log(this.restaurantsArray)
     }
     else {
       this.router.navigate(['/home'])
@@ -32,7 +31,6 @@ export class RestaurantListComponent implements OnInit {
   getRestaurantDetails(data){
     this.hit.getDetails(data).subscribe((result) => {
       if(result.status == 200){
-        console.log(result)
         this.router.navigate(['/restaurant-details']);
         this.hit.restaurantDetails(JSON.parse(result['_body']));
       }

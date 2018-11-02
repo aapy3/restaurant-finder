@@ -20,12 +20,10 @@ export class RestaurantDetailComponent implements OnInit {
 
   ngOnInit() {
     if (this.hit.sendDetails()) {
-      console.log(this.hit.sendDetails())
       this.placeDetails = this.hit.sendDetails();
       this.hit.getReviews(this.placeDetails.id,this.limit,this.skip).subscribe((result) => {
           if(result.status == 200){
             this.reviews = JSON.parse(result['_body']);
-            console.log(this.reviews)
           }
           else{
             this.reviews = undefined;
@@ -33,8 +31,7 @@ export class RestaurantDetailComponent implements OnInit {
       });
       this.hit.getMenu(this.placeDetails.id).subscribe((result) => {
         if(result.status == 200){
-          this.menu = JSON.parse(result['_body']);  
-          console.log(this.menu)
+          this.menu = JSON.parse(result['_body']);
         }
         else{
           this.menu = undefined;
@@ -48,7 +45,6 @@ export class RestaurantDetailComponent implements OnInit {
 
   changePage(event){
     this.pageEvent = event;
-    console.log(event);
     this.skip = this.limit * this.pageEvent.pageIndex;
     this.hit.getReviews(this.placeDetails.id,this.limit,this.skip).subscribe((result) => {
       if(result.status == 200){
