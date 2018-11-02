@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="offset-xl-2 offset-lg-2 offset-md-2 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <mat-card class="">
+      <img mat-card-image [(src)]="placeDetails.featured_image" alt="Photo of a Restaurant">
+      <mat-card-content>
+        <span><b>{{placeDetails.name}}</b></span>
+        <br><br>
+        <i class="fa fa-star" style="color:gold" aria-hidden="true"></i> {{placeDetails.user_rating.aggregate_rating}} ({{placeDetails.user_rating.votes}}) | 
+        <hr>
+        <span>Cost for 2</span>
+        <br>
+        <span>{{placeDetails.currency}} {{placeDetails.average_cost_for_two}}</span>
+        <br><br>
+        <span>Address</span>
+        <br>
+        <span>{{placeDetails.location.address}}</span>
+        <hr>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

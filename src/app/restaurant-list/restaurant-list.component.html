@@ -1,0 +1,15 @@
+<div class="row" *ngIf="restaurantsArray">
+  <div class="offset-xl-1 offset-lg-1 offset-md-1 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+      Showing Results
+    <mat-card class="row card_margin" *ngFor="let data of restaurantsArray" style="cursor:pointer" (click)="getRestaurantDetails(data)">
+      <img class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb != '' " mat-card-md-image [(src)]="data.restaurant.thumb" alt="Restaurant photo">
+      <img class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb == '' " mat-card-md-image src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Restaurant photo">
+      <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10 float_right">
+        <span>{{data.restaurant.name}}</span>
+        <br>
+        <i class="fa fa-star" style="color:gold" aria-hidden="true"></i> {{data.restaurant.user_rating.aggregate_rating}} ({{data.restaurant.user_rating.votes}}) | 
+      </div>
+    </mat-card>
+  </div>
+
+</div>

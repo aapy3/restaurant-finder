@@ -1,18 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MyOwnCustomMaterialModule } from './angularMaterial.module';
+import { HomeComponent } from './home/home.component';
+import { ApiHitService } from './apiHit.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpModule } from '@angular/http';
+import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    RestaurantListComponent,
+    RestaurantDetailComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    routing,
+    MyOwnCustomMaterialModule,
+    NgbModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    ApiHitService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
