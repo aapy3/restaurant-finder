@@ -2,14 +2,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
-import { AppComponent } from './app.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    component: HomeComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },

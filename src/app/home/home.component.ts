@@ -76,18 +76,19 @@ export class HomeComponent implements OnInit {
   ]
   }
 
-  // searchCity = (text$: Observable<string>) =>
-  // console.log(this.cityName);
-    // text$.pipe(
-    //   debounceTime(200),
-    //   distinctUntilChanged(),
-    //   map(term => term.length < 2 ? []
-    //     : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    // )
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 1 ? []
+        : this.cityArray.filter(v =>{
+          console.log(v)
+          return v.city_name.toLowerCase().indexOf(term.toLowerCase()) > -1}).slice(0, 10)))
+        
 
-    searchCity(){
-      console.log(this.cityName);
-    }
+    // searchCity(){
+    //   console.log(this.cityName);
+    // }
 
     searchRestaurants(data){
       this.hit.getRestaurants(data).subscribe((result) => {
