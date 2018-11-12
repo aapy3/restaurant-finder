@@ -13,6 +13,7 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgProgressModule } from 'ngx-progressbar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { NgProgressModule } from 'ngx-progressbar';
     NgbRatingModule,
     BrowserAnimationsModule,
     InfiniteScrollModule,
-    NgProgressModule
+    NgProgressModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ApiHitService
