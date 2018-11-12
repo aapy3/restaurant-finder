@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiHitService } from '../apiHit.service';
 import { Router } from '@angular/router';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -19,7 +20,7 @@ export class RestaurantListComponent implements OnInit {
   throttle = 300;
   scrollDistance = 1;
   scrollUpDistance = 2;
-  constructor(private hit: ApiHitService, private router: Router, ) {
+  constructor(private hit: ApiHitService, private router: Router,public ngProgress: NgProgress) {
     this.appendItems(0, this.sum);
   }
 
@@ -49,9 +50,11 @@ export class RestaurantListComponent implements OnInit {
   }
 
   getRestaurantDetails(data) {
+    this.ngProgress.start();
     this.hit.getDetails(data).subscribe((result) => {
       if (result.status == 200) {
         this.router.navigate(['/restaurant-details']);
+        this.ngProgress.done();
         let tmp_data = JSON.parse(result['_body']);
         tmp_data.isLike = data.restaurant.isLike;
         this.hit.restaurantDetails(tmp_data);
@@ -66,7 +69,7 @@ export class RestaurantListComponent implements OnInit {
   addItems(startIndex, endIndex, _method) {
     if(this.restaurantsArray.length>0){
       for (let i = 0; i < this.sum; ++i) {
-        this.restaurantsArray[_method]([i, ' ', this.hit.listRestaurants().restaurants].join(''));
+        this.restaurantsArray[_method]([i, ' ', this.hit.listRestaurants().restaurants]);
       }
     }
   }
@@ -114,7 +117,7 @@ export class RestaurantListComponent implements OnInit {
   
   onUp() {
     console.log('scrolled up!');
-    if(this.limit >= 20){
+    if(this.limit > 20){
       this.limit = this.limit - 20;
     }
     else{
