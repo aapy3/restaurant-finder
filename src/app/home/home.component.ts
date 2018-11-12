@@ -102,14 +102,20 @@ export class HomeComponent implements OnInit {
     }
 
     onSelectTypeahead(data){
+      data.limit = 20;
       this.searchRestaurants(data);
     }
 
     searchRestaurants(data){
+      data.limit = 20;
       this.hit.getRestaurants(data).subscribe((result) => {
         if(result.status == 200){
           this.router.navigate(['/restaurants']);
-          this.hit.sendRestaurants(JSON.parse(result['_body']));
+          let tmp_data = JSON.parse(result['_body']);
+          tmp_data.limit = 20;
+          tmp_data.latitude = data.latitude;
+          tmp_data.longitude = data.longitude;
+          this.hit.sendRestaurants(tmp_data);
         }
       })
     }
@@ -126,6 +132,7 @@ export class HomeComponent implements OnInit {
             }
             this.hit.getCities(data).subscribe((result) => {
               let data = JSON.parse(result['_body']).location_suggestions[0];
+              data.limit = 20;
               this.searchRestaurants(data);
             })
           }
