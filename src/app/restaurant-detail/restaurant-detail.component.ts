@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiHitService } from '../apiHit.service';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-restaurant-detail',
@@ -16,13 +17,15 @@ export class RestaurantDetailComponent implements OnInit {
   limit: number = 5;
   skip: number = 0;
 
-  constructor(private hit: ApiHitService, private router: Router,) { }
+  constructor(private hit: ApiHitService, private router: Router,public ngProgress: NgProgress) { }
 
   ngOnInit() {
     if (this.hit.sendDetails()) {
       this.placeDetails = this.hit.sendDetails();
+      this.ngProgress.start();
       this.hit.getReviews(this.placeDetails.id,this.limit,this.skip).subscribe((result) => {
           if(result.status == 200){
+            this.ngProgress.done();
             this.reviews = JSON.parse(result['_body']);
           }
           else{

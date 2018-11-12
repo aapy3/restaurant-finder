@@ -27,7 +27,7 @@ export class ApiHitService {
   getRestaurants(data){
     let api;
     if(data.latitude){
-      api = this.apiUrl + '/search?lat='+data.latitude+'&lon='+data.longitude;
+      api = this.apiUrl + '/search?lat='+data.latitude+'&lon='+data.longitude+'&count='+data.limit;
     }
     // else if(data.name){
     //   api = this.apiUrl + '/search?q='+data.name;

@@ -1,24 +1,29 @@
-<div class="row card_margin" *ngIf="restaurantsArray">
-  <div class="offset-xl-2 offset-lg-2 offset-md-2 col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8">
-    Showing Results
-    <mat-card class="row card_margin" *ngFor="let data of restaurantsArray; let i = index" style="cursor:pointer">
-      <img class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb != '' " mat-card-md-image
-        [(src)]="data.restaurant.thumb" alt="Restaurant photo">
-      <img class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb == '' " mat-card-md-image
-        src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Restaurant photo">
-      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8 float_right">
-        <span>{{data.restaurant.name}}</span>
-        <a style="margin-left:10%" (click)="like(i)">
-          <i [ngClass]="{'like': data.restaurant.isLike, 'unlike': !data.restaurant.isLike}" class="fa fa-thumbs-up"
-            aria-hidden="true"></i>
-        </a>
-        <br>
-        <i class="fa fa-star" style="color:gold" aria-hidden="true"></i>
-        {{data.restaurant.user_rating.aggregate_rating}} ({{data.restaurant.user_rating.votes}}) |
-        <br>
-        <a class="view" (click)="getRestaurantDetails(data)">View Details</a>
-      </div>
-    </mat-card>
-  </div>
+<ng-progress></ng-progress>
+<!-- <div class="search-results" infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()" (scrolledUp)="onUp()"> -->
+  <div class="row card_margin" *ngIf="restaurantsArray">
+    <div class="offset-xl-2 offset-lg-2 offset-md-2 col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8">
+      Showing Results
+
+      <mat-card class="row card_margin" *ngFor="let data of restaurantsArray; let i = index" style="cursor:pointer">
+        <img class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb != '' "
+          mat-card-md-image [(src)]="data.restaurant.thumb" alt="Restaurant photo">
+        <img class="col-xl-2 col- lg-2 col-md-2 col-sm-2 col-xs-2" *ngIf="data.restaurant.thumb == '' "
+          mat-card-md-image src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Restaurant photo">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-8 float_right">
+          <span>{{data.restaurant.name}}</span>
+          <a style="margin-left:10%" (click)="like(i)">
+            <i [ngClass]="{'like': data.restaurant.isLike, 'unlike': !data.restaurant.isLike}" class="fa fa-thumbs-up"
+              aria-hidden="true"></i>
+          </a>
+          <br>
+          <i class="fa fa-star" style="color:gold" aria-hidden="true"></i>
+          {{data.restaurant.user_rating.aggregate_rating}} ({{data.restaurant.user_rating.votes}}) |
+          <br>
+          <a class="view" (click)="getRestaurantDetails(data)">View Details</a>
+        </div>
+      </mat-card>
+    </div>
+  <!-- </div> -->
 
 </div>

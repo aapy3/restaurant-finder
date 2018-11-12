@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import { ApiHitService } from '../apiHit.service';
 import { Router } from '@angular/router';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   public cityArray = [];
   public cityName;
   searchCityArray: any = [];
-  constructor(private hit : ApiHitService,private router: Router,) { 
+  constructor(private hit : ApiHitService,private router: Router,public ngProgress: NgProgress) { 
   }
 
   ngOnInit() {
@@ -102,14 +103,22 @@ export class HomeComponent implements OnInit {
     }
 
     onSelectTypeahead(data){
+      data.limit = 20;
       this.searchRestaurants(data);
     }
 
     searchRestaurants(data){
+      data.limit = 20;
+      this.ngProgress.start();
       this.hit.getRestaurants(data).subscribe((result) => {
         if(result.status == 200){
+          let tmp_data = JSON.parse(result['_body']);
+          tmp_data.limit = 20;
+          tmp_data.latitude = data.latitude;
+          tmp_data.longitude = data.longitude;
+          this.hit.sendRestaurants(tmp_data);
           this.router.navigate(['/restaurants']);
-          this.hit.sendRestaurants(JSON.parse(result['_body']));
+          this.ngProgress.done();
         }
       })
     }
@@ -126,6 +135,7 @@ export class HomeComponent implements OnInit {
             }
             this.hit.getCities(data).subscribe((result) => {
               let data = JSON.parse(result['_body']).location_suggestions[0];
+              data.limit = 20;
               this.searchRestaurants(data);
             })
           }
