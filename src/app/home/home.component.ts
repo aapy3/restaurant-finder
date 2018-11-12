@@ -13,7 +13,7 @@ import { NgProgress } from 'ngx-progressbar';
 export class HomeComponent implements OnInit {
 
   public cityArray = [];
-  public cityName;
+  public cityName: string = '';
   searchCityArray: any = [];
   constructor(private hit : ApiHitService,private router: Router,public ngProgress: NgProgress) { 
   }
@@ -89,11 +89,11 @@ export class HomeComponent implements OnInit {
         
 
     searchCity(){
-      this.cityName = document.getElementById('typeahead-template')['value'];
+      // this.cityName = document.getElementById('typeahead-template')['value'];
+      if(this.cityName.length > 2){
       let data = {
         'cityName': this.cityName
       }
-      if(this.cityName.length > 1){
         this.hit.getCities(data).subscribe((result) => {
           let data = JSON.parse(result['_body']).location_suggestions;
           this.searchCityArray = data;
