@@ -1,5 +1,16 @@
 <ng-progress></ng-progress>
 <div class="offset-xl-3 offset-lg-3 offset-md-3 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 header_margin">
+
+  <mat-form-field>
+    <mat-select [multiple]="true" [formControl]="bankMultiFilterCtrl" placeholder="Bank" #singleSelect>
+      <mat-option>
+        <ngx-mat-select-search [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let bank of banks" [value]="bank">
+        {{bank.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
  
   <ng-template #rt let-r="result" let-t="term">
     <ngb-highlight [result]="r.city_name" [term]="t"></ngb-highlight>

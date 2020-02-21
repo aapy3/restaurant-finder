@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {Observable, Subject, ReplaySubject} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
 import { ApiHitService } from '../apiHit.service';
 import { Router } from '@angular/router';
 import { NgProgress } from 'ngx-progressbar';
+import { FormControl } from '@angular/forms';
+
+interface Bank {
+  id: string;
+  name: string;
+ }
 
 @Component({
   selector: 'app-home',
@@ -12,13 +18,45 @@ import { NgProgress } from 'ngx-progressbar';
 })
 export class HomeComponent implements OnInit {
 
+
+  private _onDestroy = new Subject<void>();
+  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
+
   public cityArray = [];
   public cityName: string = '';
   searchCityArray: any = [];
+  public bankMultiCtrl: FormControl = new FormControl();
+  public bankMultiFilterCtrl: FormControl = new FormControl();
+  public banks = [
+    {name: 'Bank A (Switzerland)', id: 'A'},
+    {name: 'Bank B (Switzerland)', id: 'B'},
+    {name: 'Bank C (France)', id: 'C'},
+    {name: 'Bank D (France)', id: 'D'},
+    {name: 'Bank E (France)', id: 'E'},
+    {name: 'Bank F (Italy)', id: 'F'},
+    {name: 'Bank G (Italy)', id: 'G'},
+    {name: 'Bank H (Italy)', id: 'H'},
+    {name: 'Bank I (Italy)', id: 'I'},
+    {name: 'Bank J (Italy)', id: 'J'},
+    {name: 'Bank K (Italy)', id: 'K'},
+    {name: 'Bank L (Germany)', id: 'L'},
+    {name: 'Bank M (Germany)', id: 'M'},
+    {name: 'Bank N (Germany)', id: 'N'},
+    {name: 'Bank O (Germany)', id: 'O'},
+    {name: 'Bank P (Germany)', id: 'P'},
+    {name: 'Bank Q (Germany)', id: 'Q'},
+    {name: 'Bank R (Germany)', id: 'R'} 
+  ]
+
   constructor(private hit : ApiHitService,private router: Router,public ngProgress: NgProgress) { 
   }
 
   ngOnInit() {
+    this.bankMultiFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {        
+        this.filterBanksMulti();
+      });
     this.cityArray = [
       {
         "entity_type": "city",
@@ -77,6 +115,28 @@ export class HomeComponent implements OnInit {
       },
   ]
   }
+
+  private filterBanksMulti() {
+    console.log('in func');
+    
+    if (!this.banks) {
+      return;
+    }
+    // get the search keyword
+    let search = this.bankMultiFilterCtrl.value;
+    if (!search) {
+      this.filteredBanksMulti.next(this.banks.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredBanksMulti.next(
+      this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
+    );
+  }
+
+
 
   search = (text$: Observable<string>) =>
     text$.pipe(
